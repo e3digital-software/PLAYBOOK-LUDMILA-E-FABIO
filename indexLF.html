@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ludmila &amp; Fabio · Playbook Auxílio-Acidente</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#0a0a10;
+  --bg-2:#10101a;
+  --bg-3:#161622;
+  --card:#13131e;
+  --card-hover:#181826;
+  --line:#26263a;
+  --line-soft:#1c1c2a;
+  --text:#f1eef7;
+  --text-soft:#a8a4b8;
+  --muted:#6a6680;
+  --violet:#3b82f6;
+  --violet-deep:#2563eb;
+  --violet-glow:rgba(59,130,246,.18);
+  --green:#facc15;
+  --green-deep:#eab308;
+  --green-glow:rgba(250,204,21,.16);
+  --rose:#f472b6;
+  --amber:#fbbf24;
+  --red:#f87171;
+  --red-bg:rgba(248,113,113,.07);
+  --green-bg:rgba(250,204,21,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'IBM Plex Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(59,130,246,.08), transparent 60%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(250,204,21,.05), transparent 50%);
+}
+
+/* ============ HEADER ============ */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(10,10,16,.72);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topbar-inner{
+  max-width:1280px; margin:0 auto;
+  padding:14px 28px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.brand{
+  display:flex; align-items:center; gap:11px;
+  font-family:'JetBrains Mono',monospace; font-size:11.5px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--text-soft);
+  cursor:pointer; user-select:none;
+}
+.brand-dot{
+  width:8px; height:8px; border-radius:50%;
+  background:var(--violet); box-shadow:0 0 12px var(--violet);
+}
+.brand b{color:var(--text); font-weight:600}
+.top-actions{display:flex; align-items:center; gap:10px}
+.kbd-btn{
+  display:inline-flex; align-items:center; gap:9px;
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  letter-spacing:.07em; text-transform:uppercase;
+  background:transparent; color:var(--text-soft); cursor:pointer;
+  padding:9px 14px; border:1px solid var(--line); border-radius:10px;
+  transition:all .18s;
+}
+.kbd-btn:hover{border-color:var(--violet); color:var(--text); background:var(--violet-glow)}
+.kbd-key{
+  font-size:10px; color:var(--muted);
+  border:1px solid var(--line); border-radius:5px;
+  padding:1px 6px;
+}
+
+/* ============ MAIN WRAP ============ */
+.shell{position:relative; z-index:1}
+.view{display:none}
+.view.active{display:block; animation:fadeUp .45s cubic-bezier(.2,.7,.3,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ============ HERO ============ */
+.hero{
+  max-width:1180px; margin:0 auto;
+  padding:90px 28px 60px;
+  text-align:center;
+  position:relative;
+}
+.kicker{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--violet);
+  padding:8px 18px; border:1px solid var(--line);
+  border-radius:100px; background:var(--violet-glow);
+}
+.kicker::before{
+  content:""; width:7px; height:7px; border-radius:50%;
+  background:var(--violet); box-shadow:0 0 10px var(--violet);
+}
+.hero h1{
+  font-family:'DM Serif Display',serif; font-weight:400;
+  font-size:clamp(48px,8vw,108px); line-height:.98; letter-spacing:-.02em;
+  margin:32px 0 18px;
+}
+.hero h1 em{
+  font-style:italic; color:var(--violet);
+  text-shadow:0 0 60px rgba(59,130,246,.25);
+}
+.hero-sub{
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  letter-spacing:.4em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:32px;
+}
+.hero p{
+  max-width:54ch; margin:0 auto;
+  color:var(--text-soft); font-size:17px;
+}
+.hero-actions{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
+  margin-top:40px;
+}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'IBM Plex Sans',sans-serif; font-weight:500;
+  padding:14px 24px; border-radius:13px; cursor:pointer;
+  font-size:15px; transition:all .2s; border:1px solid transparent;
+}
+.btn-primary{
+  background:var(--violet); color:#fff;
+  box-shadow:0 8px 26px -8px rgba(59,130,246,.6), 0 0 0 1px rgba(59,130,246,.4);
+}
+.btn-primary:hover{background:var(--violet-deep); transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent; color:var(--text-soft);
+  border-color:var(--line);
+}
+.btn-ghost:hover{border-color:var(--text-soft); color:var(--text); background:var(--bg-2)}
+.btn-arrow{
+  display:inline-block; transition:transform .2s;
+}
+.btn-primary:hover .btn-arrow{transform:translateX(3px)}
+
+.continue{
+  max-width:660px; margin:48px auto 0;
+  background:var(--card); border:1px solid var(--line);
+  border-radius:14px; padding:16px 20px;
+  display:flex; align-items:center; gap:16px; cursor:pointer;
+  transition:all .2s;
+}
+.continue:hover{border-color:var(--green); background:var(--card-hover)}
+.continue-num{
+  width:46px; height:46px; border-radius:11px;
+  background:var(--green-bg); border:1px solid rgba(250,204,21,.25);
+  display:grid; place-items:center;
+  font-family:'JetBrains Mono',monospace; font-weight:600;
+  color:var(--green); font-size:14px;
+}
+.continue-text{flex:1; text-align:left}
+.continue-text .lbl{
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+}
+.continue-text .title{font-weight:500; font-size:15.5px; margin-top:2px}
+.continue-arrow{color:var(--muted); transition:all .2s}
+.continue:hover .continue-arrow{color:var(--green); transform:translateX(3px)}
+
+/* ============ TESE SECTION ============ */
+.section{max-width:1180px; margin:0 auto; padding:60px 28px}
+.section-head{margin-bottom:34px}
+.section-title{
+  font-family:'IBM Plex Sans',sans-serif; font-weight:600;
+  font-size:28px; letter-spacing:-.01em; margin-bottom:6px;
+}
+.section-sub{color:var(--text-soft); font-size:15px}
+.section-divider{
+  margin-top:22px; height:1px;
+  background:linear-gradient(90deg, var(--line) 0%, transparent 100%);
+}
+
+.tese-grid{
+  display:grid; grid-template-columns:1fr; gap:16px;
+}
+.tese-card{
+  background:var(--card); border:1px solid var(--line);
+  border-radius:18px; padding:30px 32px;
+  position:relative; overflow:hidden;
+  cursor:pointer; transition:all .25s;
+  display:grid; grid-template-columns:1fr auto; gap:24px;
+}
+.tese-card::before{
+  content:""; position:absolute; inset:-1px; border-radius:18px; padding:1px;
+  background:linear-gradient(135deg, transparent 30%, var(--green-glow) 100%);
+  -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; opacity:0;
+  transition:opacity .25s;
+}
+.tese-card:hover{transform:translateY(-2px); background:var(--card-hover); box-shadow:0 24px 70px -30px var(--green-glow)}
+.tese-card:hover::before{opacity:1}
+.tese-tag{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--green);
+  margin-bottom:14px;
+}
+.tese-tag::before{
+  content:""; width:7px; height:7px; border-radius:50%; background:var(--green);
+  box-shadow:0 0 10px var(--green);
+}
+.tese-name{
+  font-family:'DM Serif Display',serif; font-weight:400;
+  font-size:36px; letter-spacing:-.01em; line-height:1.05;
+  margin-bottom:12px;
+}
+.tese-desc{color:var(--text-soft); font-size:15px; max-width:60ch}
+.tese-meta{
+  display:flex; gap:38px; margin-top:24px;
+  padding-top:20px; border-top:1px solid var(--line-soft);
+}
+.meta-item .lbl{
+  font-family:'JetBrains Mono',monospace; font-size:9.5px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:4px;
+}
+.meta-item .val{font-weight:500; font-size:14.5px}
+.tese-icon{
+  align-self:flex-start; opacity:.18; flex-shrink:0;
+}
+
+/* ============ ESTRUTURA ============ */
+.struct-overline{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--green);
+  display:flex; align-items:center; gap:14px; margin-bottom:38px;
+  font-weight:500;
+}
+.struct-overline::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(250,204,21,.4), transparent)}
+.phase{display:grid; grid-template-columns:240px 1fr; gap:40px; margin-bottom:46px}
+.phase-label{position:relative}
+.phase-num{
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--green); margin-bottom:10px;
+  display:flex; align-items:center; gap:12px; font-weight:500;
+}
+.phase-num::after{content:""; width:30px; height:1px; background:var(--green); opacity:.6}
+.phase-title{
+  font-family:'IBM Plex Sans',sans-serif; font-weight:600;
+  font-size:22px; letter-spacing:-.01em; margin-bottom:8px;
+}
+.phase-desc{color:var(--text-soft); font-size:14px}
+.phase-items{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px}
+.phase-item{
+  display:flex; align-items:center; gap:14px; cursor:pointer;
+  background:var(--card); border:1px solid var(--line);
+  border-radius:12px; padding:15px 18px;
+  font-size:15px; transition:all .2s;
+}
+.phase-item:hover{border-color:var(--violet); background:var(--card-hover)}
+.phase-item-num{
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  color:var(--muted); flex-shrink:0;
+}
+
+/* ============ PLAYBOOK VIEW ============ */
+.pb-wrap{max-width:1280px; margin:0 auto; padding:36px 28px 80px}
+.pb-grid{display:grid; grid-template-columns:240px 1fr; gap:48px; align-items:start}
+
+.pb-side{position:sticky; top:84px}
+.pb-back{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); cursor:pointer; background:none; border:none;
+  padding:0; margin-bottom:28px; transition:color .15s;
+}
+.pb-back:hover{color:var(--text)}
+.pb-summary{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:14px;
+}
+.pb-progress{
+  height:3px; background:var(--line-soft); border-radius:3px;
+  overflow:hidden; margin-bottom:6px;
+}
+.pb-progress-bar{
+  height:100%; background:linear-gradient(90deg,var(--violet),var(--green));
+  border-radius:3px; transition:width .35s ease;
+}
+.pb-count{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  color:var(--green); text-align:right; margin-bottom:24px;
+  letter-spacing:.05em;
+}
+.pb-nav{list-style:none; display:flex; flex-direction:column; gap:4px}
+.pb-nav-item{
+  display:flex; align-items:flex-start; gap:14px;
+  padding:11px 14px; border-radius:10px; cursor:pointer;
+  border:1px solid transparent; transition:all .18s;
+}
+.pb-nav-item:hover{background:var(--card)}
+.pb-nav-item.active{
+  background:var(--card); border-color:var(--violet);
+  box-shadow:0 0 0 1px var(--violet) inset, 0 8px 24px -10px var(--violet-glow);
+}
+.pb-nav-num{
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  color:var(--muted); flex-shrink:0; padding-top:1px;
+}
+.pb-nav-item.active .pb-nav-num{color:var(--green); font-weight:600}
+.pb-nav-text{font-size:14px; line-height:1.4; color:var(--text-soft); position:relative}
+.pb-nav-item.active .pb-nav-text{color:var(--text); font-weight:500}
+.pb-nav-item.active .pb-nav-text::after{
+  content:""; position:absolute; right:-18px; top:6px;
+  width:6px; height:6px; border-radius:50%;
+  background:var(--violet); box-shadow:0 0 10px var(--violet);
+}
+
+/* ============ PB CONTENT ============ */
+.pb-content{min-width:0}
+.pb-head{
+  margin-bottom:32px; padding-bottom:24px;
+  border-bottom:1px solid var(--line-soft);
+  display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.pb-head-text h1{
+  font-family:'IBM Plex Sans',sans-serif; font-weight:700;
+  font-size:36px; letter-spacing:-.01em; line-height:1.1; margin-bottom:8px;
+}
+.pb-head-sub{
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+}
+.pb-tag-row{display:flex; flex-wrap:wrap; gap:8px}
+.pb-tag{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:7px 13px; border-radius:100px;
+  background:var(--green-bg); color:var(--green);
+  border:1px solid rgba(250,204,21,.25);
+}
+.pb-tag::before{
+  content:""; width:6px; height:6px; border-radius:50%; background:currentColor;
+  box-shadow:0 0 8px currentColor;
+}
+
+.pb-card{
+  background:var(--card); border:1px solid var(--line);
+  border-radius:18px; padding:32px 36px; margin-bottom:24px;
+}
+.pb-part-tag{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--green);
+  padding:5px 12px; border-radius:6px;
+  background:var(--green-bg);
+  border:1px solid rgba(250,204,21,.25);
+  margin-bottom:24px;
+  font-weight:500;
+}
+.pb-card h2{
+  font-family:'IBM Plex Sans',sans-serif; font-weight:700;
+  font-size:44px; letter-spacing:-.02em; line-height:1.05;
+  margin-bottom:20px;
+}
+.pb-intro{font-size:16.5px; color:var(--text-soft); margin-bottom:24px; max-width:68ch}
+
+.nesta-parte{
+  background:var(--bg-3); border:1px solid var(--line-soft);
+  border-radius:14px; padding:22px 26px; margin-top:8px;
+}
+.nesta-parte-label{
+  display:flex; align-items:center; gap:10px;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:16px;
+}
+.nesta-parte-label::before{content:""; width:24px; height:1px; background:var(--green)}
+.nesta-parte ul{
+  list-style:none; display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:11px 32px;
+}
+.nesta-parte li{
+  display:flex; gap:10px; font-size:14.5px; color:var(--text);
+}
+.nesta-parte li::before{
+  content:""; width:6px; height:6px; border-radius:50%; background:var(--green);
+  margin-top:8px; flex-shrink:0; box-shadow:0 0 10px var(--green);
+}
+
+/* ============ PB ELEMENTS ============ */
+.sub-h{
+  font-family:'IBM Plex Sans',sans-serif; font-weight:600;
+  font-size:24px; letter-spacing:-.01em; line-height:1.2;
+  margin:36px 0 14px; display:flex; align-items:center; gap:11px;
+}
+.sub-h::before{
+  content:""; width:6px; height:6px; border-radius:50%;
+  background:var(--green); box-shadow:0 0 10px var(--green);
+}
+.text-p{color:var(--text-soft); font-size:15.5px; margin-bottom:14px; max-width:72ch}
+.text-p b{color:var(--text); font-weight:600}
+
+.overline{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.18em; text-transform:uppercase;
+  display:flex; align-items:center; gap:11px; margin:24px 0 12px;
+  color:var(--green);
+  font-weight:500;
+}
+.overline::before{content:"—"; color:var(--green)}
+
+.bullet-list{list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:18px}
+.bullet-list li{display:flex; gap:11px; font-size:15px; color:var(--text)}
+.bullet-list li::before{
+  content:""; width:5px; height:5px; border-radius:50%; background:var(--green);
+  margin-top:9px; flex-shrink:0;
+}
+
+.dual-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0}
+@media(max-width:760px){.dual-grid{grid-template-columns:1fr}}
+.dual-card{
+  border-radius:14px; padding:20px 22px;
+  border:1px solid;
+}
+.dual-card.can{
+  background:var(--green-bg); border-color:rgba(250,204,21,.22);
+}
+.dual-card.cant{
+  background:var(--red-bg); border-color:rgba(248,113,113,.22);
+}
+.dual-card-h{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.18em; text-transform:uppercase; margin-bottom:14px;
+  font-weight:500;
+}
+.dual-card.can .dual-card-h{color:var(--green)}
+.dual-card.cant .dual-card-h{color:var(--red)}
+.dual-card ul{list-style:none; display:flex; flex-direction:column; gap:9px}
+.dual-card li{display:flex; gap:10px; font-size:14.5px; color:var(--text); line-height:1.45}
+.dual-card.can li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--green); margin-top:8px; flex-shrink:0}
+.dual-card.cant li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--red); margin-top:8px; flex-shrink:0}
+
+.callout{
+  background:linear-gradient(135deg, var(--green-bg), transparent 70%);
+  border:1px solid rgba(250,204,21,.25);
+  border-left:3px solid var(--green);
+  border-radius:12px; padding:18px 22px; margin:18px 0;
+}
+.callout-label{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--green); margin-bottom:8px;
+}
+.callout p{font-size:15.5px; color:var(--text)}
+.callout p b{color:var(--green)}
+
+/* SCRIPT BLOCK */
+.script{
+  background:var(--bg-3); border:1px solid var(--line);
+  border-left:3px solid var(--violet);
+  border-radius:12px; margin:14px 0; overflow:hidden;
+}
+.script-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:13px 18px 9px;
+}
+.script-label{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--violet);
+  font-weight:500;
+}
+.script-actions{display:flex; gap:8px}
+.btn-sm{
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  letter-spacing:.06em; text-transform:uppercase;
+  background:transparent; color:var(--text-soft);
+  border:1px solid var(--line); border-radius:7px;
+  padding:6px 11px; cursor:pointer; transition:all .15s;
+}
+.btn-sm:hover{border-color:var(--violet); color:var(--text); background:var(--violet-glow)}
+.btn-sm.done{background:var(--green); color:#000; border-color:var(--green)}
+.script-text{
+  padding:0 18px 16px; white-space:pre-wrap;
+  font-family:'JetBrains Mono',monospace; font-size:13px;
+  line-height:1.72; color:var(--text);
+}
+.script-why{
+  padding:11px 18px 14px; font-size:13.5px; font-style:italic;
+  color:var(--text-soft); border-top:1px dashed var(--line);
+  background:rgba(59,130,246,.04);
+}
+.script-why b{color:var(--violet); font-style:normal; font-weight:600}
+
+.bubbles{display:none; flex-direction:column; gap:10px; padding:4px 18px 16px}
+.bubbles.show{display:flex; animation:fadeUp .25s ease}
+.bubble{
+  background:rgba(250,204,21,.08); border:1px solid rgba(250,204,21,.2);
+  border-radius:4px 14px 14px 14px;
+  padding:10px 14px 22px; position:relative; max-width:88%;
+  font-family:'JetBrains Mono',monospace; font-size:12.5px;
+  line-height:1.6; color:var(--text); white-space:pre-wrap;
+}
+.bubble .bcopy{
+  position:absolute; right:8px; bottom:5px;
+  font-family:'JetBrains Mono',monospace; font-size:9px;
+  letter-spacing:.06em; text-transform:uppercase;
+  background:rgba(0,0,0,.3); border:none; cursor:pointer;
+  padding:4px 9px; border-radius:6px; color:var(--green);
+  transition:all .15s;
+}
+.bubble .bcopy:hover{background:var(--green); color:#000}
+.bubble .bcopy.done{background:var(--green); color:#000}
+.bubbles-hint{
+  font-family:'JetBrains Mono',monospace; font-size:9.5px;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:2px;
+}
+
+/* TABLE */
+table{
+  width:100%; border-collapse:collapse; margin:14px 0;
+  background:var(--bg-3); border-radius:12px; overflow:hidden;
+  border:1px solid var(--line);
+}
+th,td{
+  text-align:left; padding:13px 16px;
+  border-bottom:1px solid var(--line-soft); font-size:14px;
+}
+th{
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text-soft); font-weight:500;
+  background:var(--card-hover);
+}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:500}
+tbody tr:hover{background:var(--card-hover)}
+
+/* TAGS */
+.s-tag{
+  display:inline-block; font-family:'JetBrains Mono',monospace; font-size:9.5px;
+  letter-spacing:.1em; text-transform:uppercase; padding:4px 11px;
+  border-radius:6px; margin-top:18px; font-weight:500;
+}
+.s-tag-green{background:rgba(250,204,21,.14); color:var(--green)}
+.s-tag-amber{background:rgba(251,191,36,.14); color:var(--amber)}
+.s-tag-red{background:rgba(248,113,113,.14); color:var(--red)}
+
+.pb-pager{
+  display:flex; justify-content:space-between; gap:14px;
+  margin-top:38px; padding-top:24px; border-top:1px solid var(--line-soft);
+}
+.pager-btn{
+  flex:1; max-width:300px;
+  background:var(--card); border:1px solid var(--line);
+  border-radius:14px; padding:18px 22px; cursor:pointer;
+  transition:all .2s; text-align:left;
+  font-family:'IBM Plex Sans',sans-serif; color:var(--text);
+}
+.pager-btn:hover{border-color:var(--violet); background:var(--card-hover)}
+.pager-btn:disabled{opacity:.3; cursor:not-allowed}
+.pager-btn .lbl{
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:4px;
+}
+.pager-btn .title{font-size:15px; font-weight:500}
+.pager-btn.next{text-align:right}
+
+/* ============ SEARCH MODAL ============ */
+.search-overlay{
+  position:fixed; inset:0; z-index:90;
+  background:rgba(0,0,0,.6); backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:none; align-items:flex-start; justify-content:center;
+  padding-top:14vh;
+}
+.search-overlay.show{display:flex; animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.search-box{
+  width:100%; max-width:680px;
+  background:var(--bg-2); border:1px solid var(--line);
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+}
+.search-input-wrap{
+  display:flex; align-items:center; gap:12px;
+  padding:18px 22px; border-bottom:1px solid var(--line-soft);
+}
+.search-input-wrap span{color:var(--muted); font-size:19px}
+#searchInput{
+  flex:1; background:transparent; border:none; outline:none;
+  color:var(--text); font-size:16px; font-family:inherit;
+}
+#searchInput::placeholder{color:var(--muted)}
+.search-esc{
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  letter-spacing:.1em; color:var(--muted);
+  border:1px solid var(--line); padding:3px 8px; border-radius:5px;
+}
+.search-results{max-height:60vh; overflow-y:auto; padding:8px}
+.search-empty{padding:36px; text-align:center; color:var(--muted); font-style:italic}
+.sr-item{
+  padding:13px 16px; border-radius:10px; cursor:pointer;
+  border:1px solid transparent; margin-bottom:4px;
+}
+.sr-item:hover, .sr-item.active{background:var(--card); border-color:var(--line)}
+.sr-crumb{
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--violet);
+  margin-bottom:4px;
+}
+.sr-title{font-weight:500; font-size:14.5px; margin-bottom:3px}
+.sr-snippet{font-size:13px; color:var(--text-soft); line-height:1.45}
+mark{background:rgba(251,191,36,.3); color:inherit; padding:0 2px; border-radius:3px}
+
+/* TOAST */
+.toast{
+  position:fixed; bottom:30px; left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--card); color:var(--text);
+  padding:13px 22px; border-radius:11px;
+  border:1px solid var(--green);
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  letter-spacing:.06em; z-index:120;
+  display:flex; align-items:center; gap:9px;
+  transition:transform .3s cubic-bezier(.2,.8,.3,1);
+  box-shadow:0 16px 40px -10px rgba(0,0,0,.5);
+}
+.toast::before{content:"✓"; color:var(--green); font-weight:700}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+footer{
+  text-align:center; padding:34px 22px;
+  color:var(--muted); font-size:12px;
+  border-top:1px solid var(--line-soft); margin-top:60px;
+}
+
+@media(max-width:920px){
+  .pb-grid{grid-template-columns:1fr; gap:24px}
+  .pb-side{position:static}
+  .phase{grid-template-columns:1fr; gap:18px}
+  .tese-card{grid-template-columns:1fr}
+  .tese-icon{display:none}
+  .hero{padding:60px 20px 40px}
+  .pb-card{padding:24px 22px}
+  .pb-card h2{font-size:32px}
+}
+@media(max-width:560px){
+  .pb-head h1{font-size:26px}
+  .topbar-inner{padding:12px 18px}
+  .section{padding:40px 20px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" onclick="showView('home')">
+      <span class="brand-dot"></span>
+      <span>Ludmila &amp; Fabio · <b>Auxílio-Acidente</b></span>
+    </div>
+    <div class="top-actions">
+      <button class="kbd-btn" onclick="openSearch()">
+        <span>⌕</span><span>Buscar</span><span class="kbd-key">⌘K</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+
+<!-- ========== HOME ========== -->
+<section id="view-home" class="view active">
+  <div class="hero">
+    <span class="kicker">Painel · Operação Jurídica</span>
+    <h1>Ludmila <em>&amp; Fabio</em></h1>
+    <p>Playbook Comercial — <span style="color:var(--green); font-weight:500">Auxílio-Acidente</span>. Tudo o que sua equipe precisa pra atender, qualificar, agendar e fechar com qualidade — em um único lugar.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="showView('playbook')">Abrir Playbook <span class="btn-arrow">→</span></button>
+      <button class="btn btn-ghost" onclick="openSearch()">⌕ Buscar <span class="kbd-key" style="margin-left:4px">⌘K</span></button>
+    </div>
+    <div class="continue" onclick="goToPart(9)">
+      <div class="continue-num">09</div>
+      <div class="continue-text">
+        <div class="lbl">Acesso rápido</div>
+        <div class="title">Quick Reference Cards</div>
+      </div>
+      <div class="continue-arrow">→</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2 class="section-title">A tese</h2>
+      <p class="section-sub">O perfil exato da lead que sua equipe vai atender.</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="tese-grid">
+      <div class="tese-card" onclick="goToPart(1)">
+        <div>
+          <div class="tese-tag">Auxílio-Acidente</div>
+          <h3 class="tese-name">Trabalhador Acidentado</h3>
+          <p class="tese-desc">Trabalhadores com sequela permanente que reduz a capacidade laboral. Pragmáticos, céticos, querem saber se têm direito sem rodeio.</p>
+          <div class="tese-meta">
+            <div class="meta-item"><div class="lbl">Perfil</div><div class="val">Sequela definitiva</div></div>
+            <div class="meta-item"><div class="lbl">Prova</div><div class="val">Laudo médico</div></div>
+            <div class="meta-item"><div class="lbl">Tom</div><div class="val">Direto, técnico</div></div>
+          </div>
+        </div>
+        <svg class="tese-icon" width="110" height="110" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="struct-overline">Estrutura do Playbook</div>
+
+    <div class="phase">
+      <div class="phase-label">
+        <div class="phase-num">Fase 01</div>
+        <div class="phase-title">Diagnóstico</div>
+        <div class="phase-desc">Quem é o público e como recebê-lo.</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item" onclick="goToPart(1)"><span class="phase-item-num">01</span>Briefing de Público (Persona)</div>
+        <div class="phase-item" onclick="goToPart(2)"><span class="phase-item-num">02</span>Scripts de Recepção</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">
+        <div class="phase-num">Fase 02</div>
+        <div class="phase-title">Operação</div>
+        <div class="phase-desc">Qualificação, agendamento, consulta e follow-up.</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item" onclick="goToPart(3)"><span class="phase-item-num">03</span>Scripts de Qualificação</div>
+        <div class="phase-item" onclick="goToPart(4)"><span class="phase-item-num">04</span>Agendamento e Lembretes</div>
+        <div class="phase-item" onclick="goToPart(5)"><span class="phase-item-num">05</span>Estrutura de Consulta (Advogado)</div>
+        <div class="phase-item" onclick="goToPart(6)"><span class="phase-item-num">06</span>Fluxos de Follow-up</div>
+        <div class="phase-item" onclick="goToPart(7)"><span class="phase-item-num">07</span>Scripts de Objeção</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">
+        <div class="phase-num">Fase 03</div>
+        <div class="phase-title">Métricas &amp; Recursos</div>
+        <div class="phase-desc">KPIs, referências rápidas e glossário.</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item" onclick="goToPart(8)"><span class="phase-item-num">08</span>KPIs e Operação</div>
+        <div class="phase-item" onclick="goToPart(9)"><span class="phase-item-num">09</span>Quick Reference Cards</div>
+        <div class="phase-item" onclick="goToPart(10)"><span class="phase-item-num">10</span>Glossário de Termos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLAYBOOK VIEW ========== -->
+<section id="view-playbook" class="view">
+  <div class="pb-wrap">
+    <div class="pb-grid">
+      <aside class="pb-side">
+        <button class="pb-back" onclick="showView('home')">← Dashboard</button>
+        <div class="pb-summary">Sumário do Playbook</div>
+        <div class="pb-progress"><div class="pb-progress-bar" id="progressBar" style="width:10%"></div></div>
+        <div class="pb-count" id="progressCount">01/10</div>
+        <ul class="pb-nav" id="pbNav"></ul>
+      </aside>
+
+      <article class="pb-content" id="pbContent">
+        <div class="pb-head">
+          <div class="pb-head-text">
+            <h1>Ludmila &amp; Fabio</h1>
+            <div class="pb-head-sub">Playbook Comercial · Inteligência Jurídica Estratégica</div>
+          </div>
+          <div class="pb-tag-row">
+            <span class="pb-tag">Trab. Acidentado</span>
+          </div>
+        </div>
+        <div id="pbBody"></div>
+        <div class="pb-pager" id="pbPager"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== SEARCH MODAL ========== -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <span>⌕</span>
+      <input id="searchInput" type="text" placeholder="Buscar script… (ex: preço, faltou, negado, aposentado)" autocomplete="off">
+      <span class="search-esc">ESC</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copiado</div>
+
+<footer>
+  <b>Ludmila &amp; Fabio</b> · Documento interno · Provimento 205/2021 CFOAB
+</footer>
+
+<script>
+/* ============================
+   DADOS — TODO O CONTEÚDO
+   ============================ */
+const PARTS = [
+  {n:1, title:"Briefing de Público (Persona)", section:"Diagnóstico"},
+  {n:2, title:"Scripts de Recepção", section:"Diagnóstico"},
+  {n:3, title:"Scripts de Qualificação", section:"Operação"},
+  {n:4, title:"Agendamento e Lembretes", section:"Operação"},
+  {n:5, title:"Estrutura de Consulta (Advogado)", section:"Operação"},
+  {n:6, title:"Fluxos de Follow-up", section:"Operação"},
+  {n:7, title:"Scripts de Objeção", section:"Operação"},
+  {n:8, title:"KPIs e Operação", section:"Métricas"},
+  {n:9, title:"Quick Reference Cards", section:"Métricas"},
+  {n:10, title:"Glossário de Termos", section:"Métricas"},
+];
+
+const CONTENT = {
+1:{
+  intro:"A leitura correta do público é o fundamento de toda a operação. O trabalhador acidentado é pragmático, cético e quer saber direto se tem direito — subestimar esse perfil é o erro nº 1 que queima conversão.",
+  parts:["1.1 — Quem é a Lead","1.2 — Estado Emocional","1.3 — Tom Obrigatório","1.4 — O que Vende"],
+  body:`
+<h3 class="sub-h">1.1 — Quem é a Lead</h3>
+<div class="overline">Demografia</div>
+<ul class="bullet-list">
+<li>Homem em <b>60-70%</b> dos casos · 30-55 anos</li>
+<li>Trabalhador braçal ou de risco — motorista, motoboy, pedreiro, operário, vigilante, mecânico, montador</li>
+<li>Acidentou-se há <b>meses ou anos</b> — não está em situação aguda, está convivendo com a sequela</li>
+<li>Renda média ou média-baixa · CLT, autônomo ou MEI</li>
+<li>Boca-a-boca forte: descobre o escritório por colega de trabalho, sindicato, vizinho</li>
+</ul>
+
+<h3 class="sub-h">1.2 — Estado Emocional</h3>
+<p class="text-p">Diferente da gestante (ansiosa) ou da mãe atípica (exausta), o trabalhador acidentado chega <b>pragmático e cético</b>. Já ouviu "não tem direito" várias vezes, do RH da empresa, do colega, do INSS. Não quer papo enrolado, não quer drama. Quer saber: <b>tenho direito ou não?</b></p>
+<ul class="bullet-list">
+<li><b>Cansaço:</b> trabalha sentindo dor todo dia, ou parou de trabalhar e tá no aperto</li>
+<li><b>Ceticismo:</b> "advogado é tudo igual" — vai testar você nas primeiras frases</li>
+<li><b>Pouca paciência:</b> se a conversa enrolar, ele desiste</li>
+<li><b>Urgência prática:</b> precisa de resposta, não de acolhimento exagerado</li>
+</ul>
+
+<h3 class="sub-h">1.3 — Tom Obrigatório</h3>
+<div class="dual-grid">
+<div class="dual-card can">
+<div class="dual-card-h">Pode usar</div>
+<ul>
+<li>Falar <b>direto</b>, sem rodeio</li>
+<li>Tom técnico-acessível ("auxílio-acidente é uma indenização mensal por sequela")</li>
+<li>Tratar como <b>igual</b>, não como vítima</li>
+<li>Reconhecer o que ele já tentou ("entendo que o INSS já negou")</li>
+<li>Ser objetivo no tempo dele — "em 5 minutos eu te dou um norte"</li>
+<li>Validar o ceticismo dele com honestidade</li>
+</ul>
+</div>
+<div class="dual-card cant">
+<div class="dual-card-h">Nunca usar</div>
+<ul>
+<li>Emoji em excesso (queima a credibilidade nesse público)</li>
+<li>"Meu amor", "querido", tom maternal</li>
+<li>Prometer resultado ("vou conseguir pra você")</li>
+<li>Frases motivacionais ("não desista, Deus está com você")</li>
+<li>Tratar como coitadinho</li>
+<li>Demorar pra chegar no ponto</li>
+</ul>
+</div>
+</div>
+
+<h3 class="sub-h">1.4 — O que Vende</h3>
+<div class="callout">
+<div class="callout-label">O que vende</div>
+<p><b>Competência técnica + objetividade.</b> Esse público paga por quem fala a língua dele, mostra que entende do assunto, e respeita o tempo dele. Não paga por quem tenta "acolher demais" — isso soa como tentativa de venda.</p>
+</div>
+`
+},
+
+2:{
+  intro:"A primeira mensagem decide se a lead responde ou some. Pro trabalhador acidentado, a regra é: ser direto, mostrar que você entende a situação, e prometer resposta concreta em pouco tempo.",
+  parts:["2.1 — Mensagem de Recepção","2.2 — Por Que Funciona"],
+  body:`
+<h3 class="sub-h">2.1 — Mensagem de Recepção</h3>
+<div class="script">
+<div class="script-head">
+<span class="script-label">Recepção · primeira mensagem</span>
+<div class="script-actions">
+<button class="btn-sm parts-btn" data-text="">Em partes</button>
+<button class="btn-sm copy-btn" data-text="">Copiar</button>
+</div>
+</div>
+<div class="script-text">Olá! Aqui é a [SECRETÁRIA], da equipe da Dra. Ludmila e Dr. Fabio, especialistas em direito previdenciário.
+
+Você chegou por causa de um caso de acidente com sequela, certo?
+
+Pra eu te direcionar do jeito certo, posso te fazer algumas perguntas rápidas? Em 5 minutos eu já te dou um norte sobre seu caso.</div>
+<div class="bubbles"></div>
+<div class="script-why"><b>Por quê:</b> sem emoji, sem "tudo bem?"; "5 minutos" respeita o tempo dele; "dou um norte" é promessa concreta sem garantir resultado.</div>
+</div>
+
+<h3 class="sub-h">2.2 — Por Que Funciona</h3>
+<ul class="bullet-list">
+<li><b>Confirma motivo</b> logo — não enrola</li>
+<li><b>Apresenta a dupla</b> — Dra. Ludmila e Dr. Fabio. Autoridade desde o primeiro segundo</li>
+<li><b>"5 minutos"</b> — mata a objeção "não tenho tempo"</li>
+<li><b>"Norte sobre seu caso"</b> — promete clareza, não promete resultado</li>
+<li><b>Tom direto</b> — sem "tudo bem?", sem perguntas vazias, sem emoji</li>
+</ul>
+`
+},
+
+3:{
+  intro:"Seis perguntas que filtram caso forte, caso médio e caso inviável. Aplique uma de cada vez — não despeje tudo de uma vez.",
+  parts:["P1 — Nome","P2 — Tipo e Tempo","P3 — Sequela","P4 — Situação de Trabalho","P5 — INSS","P6 — Disponibilidade"],
+  body:`
+<h3 class="sub-h">P1 — Nome</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Qualificação · P1</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Primeiro, qual o seu nome completo?</div>
+</div>
+
+<h3 class="sub-h">P2 — Tipo e Tempo do Acidente</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Qualificação · P2</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Obrigada, [NOME]. O acidente foi de que tipo e há quanto tempo?
+
+— Trabalho
+— Trânsito
+— Em casa
+— Esporte/Lazer
+— Outro</div>
+<div class="script-why"><b>Por quê:</b> auxílio-acidente cobre qualquer tipo, mas o caminho varia. Tempo define o "frescor" do caso.</div>
+</div>
+
+<h3 class="sub-h">P3 — Sequela Atual</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Qualificação · P3 · A pergunta-chave</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">E me diz: qual sequela ficou? Em qual parte do corpo te atrapalha hoje? (dor crônica, limitação de movimento, perda de força)</div>
+<div class="script-why"><b>Chave do caso:</b> resposta concreta ("trava o joelho", "não pego peso") = caso forte. Resposta vaga ("doi às vezes") = caso médio.</div>
+</div>
+
+<h3 class="sub-h">P4 — Situação de Trabalho</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Qualificação · P4 · ATENÇÃO ESPECIAL</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], hoje você está:
+
+— Trabalhando, mas com dificuldade/dor
+— Trabalhando em função adaptada
+— Afastado pelo INSS
+— Desempregado
+— Já me aposentei</div>
+<div class="script-why"><b>⚠️ Atenção:</b> "aposentado" = auxílio-acidente NÃO acumula (cenário especial). "Trabalhando com dificuldade" = caso perfeito.</div>
+</div>
+
+<h3 class="sub-h">P5 — Já Tentou Pedir</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Qualificação · P5</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Você já tentou pedir algum benefício no INSS por causa do acidente?
+
+Se sim: foi negado, recebeu auxílio-doença e cortou, está em análise, ou outra coisa?</div>
+</div>
+
+<h3 class="sub-h">P6 — Disponibilidade</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Qualificação · P6 · Encaminhamento</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Beleza, [NOME]. Vou te encaminhar pra Dra. Ludmila ou Dr. Fabio, que vão analisar e te dizer direto se você tem direito e qual o caminho.
+
+Tem [DIA] às [HORÁRIO] ou [DIA] às [HORÁRIO]?</div>
+</div>
+
+<h3 class="sub-h">Resposta por Cenário</h3>
+
+<span class="s-tag s-tag-green">Caso forte</span>
+<div class="script">
+<div class="script-head"><span class="script-label">Sequela + trabalhando com dificuldade</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], seu caso tem elementos importantes. A Dra. Ludmila / o Dr. Fabio vai analisar em detalhe. Posso te encaixar em [DIA] às [HORÁRIO]?</div>
+</div>
+
+<span class="s-tag s-tag-red">Caso quente</span>
+<div class="script">
+<div class="script-head"><span class="script-label">Benefício cortado</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], casos de corte costumam ter caminho de reversão na via judicial — mas precisa analisar. Vou priorizar seu agendamento. Consegue ainda essa semana? Tem [DIA] às [HORÁRIO].</div>
+</div>
+
+<span class="s-tag s-tag-amber">Atenção · transparência radical</span>
+<div class="script">
+<div class="script-head"><span class="script-label">Aposentado</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], é importante esclarecer: o auxílio-acidente, por regra, não pode ser pago junto com aposentadoria. Mas há situações específicas que valem análise, especialmente se a aposentadoria foi depois do acidente. Quer agendar pra Dra. Ludmila / Dr. Fabio te orientar?</div>
+<div class="script-why"><b>Por quê:</b> não vender falsa esperança. Esse público valoriza honestidade técnica.</div>
+</div>
+`
+},
+
+4:{
+  intro:"Confirmar agendamento, listar documentos e mandar lembretes — sem perder a vibe direta do público.",
+  parts:["4.1 — Confirmação","4.2 — Lembrete 24h","4.3 — Lembrete 2h"],
+  body:`
+<h3 class="sub-h">4.1 — Confirmação do Agendamento</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Agendamento confirmado</span>
+<div class="script-actions">
+<button class="btn-sm parts-btn" data-text="">Em partes</button>
+<button class="btn-sm copy-btn" data-text="">Copiar</button>
+</div></div>
+<div class="script-text">[NOME], agendado.
+
+Data: [DIA E HORA]
+Com: Dra. Ludmila / Dr. Fabio — Especialista Previdenciário
+Formato: [Presencial / Online]
+Duração: cerca de 30-40 minutos
+
+Se tiver em mãos, ajuda muito:
+— RG e CPF
+— Documentos do acidente (BO, CAT, prontuário, alta)
+— Laudos médicos (recentes e antigos)
+— Exames de imagem (raio-x, ressonância, tomografia)
+— Carteira de trabalho ou CNIS
+— Carta de negativa do INSS (se houver)
+
+Se faltar algo, complementamos depois. Posso confirmar?</div>
+<div class="bubbles"></div>
+</div>
+
+<h3 class="sub-h">4.2 — Lembrete 24h Antes</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Lembrete · 24h</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], confirmando nossa conversa de amanhã, [DIA] às [HORÁRIO], com a Dra. Ludmila / o Dr. Fabio.
+
+[Online] Link: [LINK]
+[Presencial] Endereço: [ENDEREÇO]
+
+Tudo certo? Qualquer ajuste, me avisa.</div>
+</div>
+
+<h3 class="sub-h">4.3 — Lembrete 2h Antes</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Lembrete · 2h</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], tudo certo pra daqui a 2h?
+
+[Link/Endereço]
+
+A Dra. Ludmila / o Dr. Fabio já está com seu caso em mente.</div>
+</div>
+`
+},
+
+5:{
+  intro:"30 a 40 minutos divididos em 4 blocos. Pra esse público, o segredo é ir direto na análise técnica — ele desconfia de quem demora pra responder.",
+  parts:["5.1 — Abertura (2-3min)","5.2 — Escuta (5-7min)","5.3 — Análise Técnica (15-20min)","5.4 — Fechamento (5-7min)"],
+  body:`
+<h3 class="sub-h">5.1 — Abertura (2-3 min)</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Advogado · Abertura</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], muito prazer. Sou a Dra. Ludmila / o Dr. Fabio.
+
+Antes dos detalhes: ninguém escolhe se acidentar. E ninguém deveria brigar pra ter um direito que está na lei. Tô aqui pra te ajudar do jeito mais direto possível.
+
+Me conta com suas palavras: o que aconteceu?</div>
+<div class="script-why"><b>Por quê:</b> reconhece a injustiça em uma frase, sem dramatizar; vai direto pra história.</div>
+</div>
+
+<h3 class="sub-h">5.2 — Escuta Ativa (5-7 min)</h3>
+<p class="text-p">Deixa contar a história do acidente, do tratamento, do que aconteceu depois. <b>Não interrompe.</b> Faz perguntas só pra clarear:</p>
+<ul class="bullet-list">
+<li>"Qual foi exatamente a lesão?"</li>
+<li>"Você ficou afastado quanto tempo?"</li>
+<li>"Voltou pra mesma função ou adaptaram?"</li>
+<li>"Hoje, no dia a dia, o que mais te limita?"</li>
+</ul>
+
+<h3 class="sub-h">5.3 — Análise Técnica (15-20 min)</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Advogado · Análise técnica</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], como eu enxergo seu caso:
+
+— Natureza: auxílio-acidente é indenização mensal por sequela permanente que reduz a capacidade. Não importa se voltou a trabalhar — o que importa é a sequela existir e te atrapalhar.
+
+— Sua sequela: [recapitular]. Precisa comprovar: 1) permanência, 2) nexo com o acidente, 3) redução funcional.
+
+— Documentos: você tem [X], falta [Y].
+
+— Caminho: 1) [administrativo] 2) [judicial se preciso] 3) [prazos e comunicação]
+
+Faz sentido pra você?</div>
+</div>
+
+<h3 class="sub-h">5.4 — Fechamento (5-7 min)</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Advogado · Fechamento</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], pra continuar, o escritório trabalha assim:
+
+[Honorários transparentes]
+[O que está incluso]
+
+Quero deixar claro: não vou prometer resultado, ninguém pode. Mas garanto trabalho sério, com tudo o que a lei permite.
+
+Você quer pensar ou se sente confortável pra começar?</div>
+<div class="script-why"><b>Por quê:</b> "não prometo resultado" gera credibilidade nesse público cético; "trabalho sério" entrega a expectativa que ele quer.</div>
+</div>
+`
+},
+
+6:{
+  intro:"Cadência curta — esse público responde rápido ou some. Não force, mas não desista cedo demais.",
+  parts:["A — Não respondeu","B — Sumiu","C — Faltou","D — Não fechou"],
+  body:`
+<h3 class="sub-h">Cadências por Cenário</h3>
+<table>
+<thead><tr><th>Cenário</th><th>Toques</th><th>Janela</th><th>Quem faz</th></tr></thead>
+<tbody>
+<tr><td>A — Não respondeu</td><td>3</td><td>5 dias</td><td>Secretária</td></tr>
+<tr><td>B — Sumiu na qualificação</td><td>4</td><td>10 dias</td><td>Secretária</td></tr>
+<tr><td>C — Agendou e faltou</td><td>3</td><td>5 dias</td><td>Secret. + Advogado</td></tr>
+<tr><td>D — Consultou, não fechou</td><td>4</td><td>30 dias</td><td>Secret. + Advogado</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub-h">Cenário A — Não Respondeu</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">A1 · 24h após</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Oi! Vi que você passou por aqui ontem sobre um caso de acidente. A gente não chegou a conversar.
+
+Quando puder, me chama. Em 5 minutos eu te dou um norte do caso.</div>
+</div>
+
+<div class="script">
+<div class="script-head"><span class="script-label">A2 · 3 dias</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], como tá? Sei que a rotina é puxada — principalmente pra quem trabalha com sequela. Se quiser conversar sobre seu caso, me chama quando puder.</div>
+</div>
+
+<div class="script">
+<div class="script-head"><span class="script-label">A3 · 5 dias · último</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Última passada aqui. Se um dia quiser entender se tem direito a auxílio-acidente, é só me chamar. A porta segue aberta.</div>
+</div>
+
+<h3 class="sub-h">Cenário B — Sumiu na Qualificação</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">B4 · 10 dias · último, com gancho</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], última passada aqui. Só lembrando: auxílio-acidente não tem prazo pra ser pedido. Pode ser hoje, daqui um ano, daqui cinco. Enquanto a sequela existir, o direito existe. Se quiser conversar, é só chamar.</div>
+<div class="script-why"><b>Por quê:</b> tira a pressão de "agora" e planta a semente pra retorno futuro.</div>
+</div>
+
+<h3 class="sub-h">Cenário C — Agendou e Faltou</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">C1 · 1h após</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Oi [NOME], a Dra. Ludmila / o Dr. Fabio te esperou no horário, mas você não conseguiu vir. Tudo bem? Quer remarcar?</div>
+</div>
+
+<div class="script">
+<div class="script-head"><span class="script-label">C3 · 5 dias · último</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], última passada aqui. Quando quiser remarcar, é só me dizer. A Dra. Ludmila / o Dr. Fabio continuam à disposição pra analisar seu caso.</div>
+</div>
+
+<h3 class="sub-h">Cenário D — Consultou, Não Fechou</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">D1 · 24h · Advogado(a)</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Oi [NOME], aqui é a Dra. Ludmila / o Dr. Fabio.
+
+Foi bom conversar com você. Qualquer dúvida que tenha aparecido depois da nossa conversa, pode me mandar mensagem aqui.
+
+Tô à disposição.</div>
+</div>
+
+<div class="script">
+<div class="script-head"><span class="script-label">D3 · 14 dias · pergunta direta</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], pra te perguntar direto: ficou alguma dúvida ou tem algo te segurando? Se for valores, prazos, como funciona — posso esclarecer ou pedir pra Dra. Ludmila / o Dr. Fabio te ligar.</div>
+</div>
+
+<div class="script">
+<div class="script-head"><span class="script-label">D4 · 30 dias · último</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], como você tá? Muita gente que conversa com a gente acaba deixando pra depois — e meses depois lembra. Se ainda fizer sentido conversar, é só dizer. A porta segue aberta.</div>
+</div>
+`
+},
+
+7:{
+  intro:"Quatro objeções que aparecem em quase todo atendimento. Respostas prontas — diretas, como o público pede.",
+  parts:["INSS já negou","Tô trabalhando","Foi há muito tempo","Vou pensar"],
+  body:`
+<h3 class="sub-h">"O INSS já me negou"</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Objeção · INSS negou</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], a maioria dos casos que pegamos teve negativa antes. Negativa administrativa não é palavra final — existe a via judicial. Mas precisa analisar a negativa. A Dra. Ludmila / o Dr. Fabio fazem isso na conversa. Quer agendar?</div>
+</div>
+
+<h3 class="sub-h">"Tô trabalhando, perdi o direito?"</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Objeção · trabalhando</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], esse é o erro mais comum. Auxílio-acidente é JUSTAMENTE pra quem voltou a trabalhar com sequela — é indenização pela redução da capacidade. Pode juntar com salário. Vale conversar.</div>
+<div class="script-why"><b>Por quê:</b> mata o mito mais comum do nicho em uma frase. Esse argumento converte muito.</div>
+</div>
+
+<h3 class="sub-h">"Foi há muito tempo"</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Objeção · tempo</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">[NOME], auxílio-acidente é diferente. Enquanto a sequela existir e te atrapalhar, o direito existe. Tem gente que descobre 10 anos depois. Vale uma análise.</div>
+</div>
+
+<h3 class="sub-h">"Vou pensar"</h3>
+<div class="script">
+<div class="script-head"><span class="script-label">Objeção · pensar</span>
+<div class="script-actions"><button class="btn-sm copy-btn" data-text="">Copiar</button></div></div>
+<div class="script-text">Claro, [NOME]. Se aparecer dúvida, me chama aqui — qualquer hora. Sem compromisso.</div>
+</div>
+`
+},
+
+8:{
+  intro:"O que medir e quais metas saudáveis pra equipe. Sem KPI, não dá pra saber onde o funil tá vazando.",
+  parts:["8.1 — KPIs do Funil","8.2 — KPIs de Qualidade","8.3 — Rituais"],
+  body:`
+<h3 class="sub-h">8.1 — KPIs do Funil</h3>
+<table>
+<thead><tr><th>Métrica</th><th>Meta saudável</th><th>Quando ficar atento</th></tr></thead>
+<tbody>
+<tr><td>Taxa de resposta inicial</td><td>&gt; 75%</td><td>&lt; 60%</td></tr>
+<tr><td>Taxa de qualificação completa</td><td>&gt; 55%</td><td>&lt; 40%</td></tr>
+<tr><td>Taxa de agendamento</td><td>&gt; 45%</td><td>&lt; 30%</td></tr>
+<tr><td>Taxa de comparecimento</td><td>&gt; 75%</td><td>&lt; 60%</td></tr>
+<tr><td>Taxa de fechamento (D+30)</td><td>&gt; 55%</td><td>&lt; 35%</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub-h">8.2 — KPIs de Qualidade</h3>
+<ul class="bullet-list">
+<li><b>Tempo médio de resposta</b> &lt; 5 min em horário comercial</li>
+<li><b>Tempo entre 1ª msg e agendamento</b> &lt; 24h</li>
+<li><b>Tempo entre agendamento e consulta</b> &lt; 5 dias</li>
+<li><b>NPS pós-consulta</b> &gt; 9 (mesmo que não feche)</li>
+<li><b>Tickets reaberto após D90</b> = oportunidade preservada</li>
+</ul>
+
+<h3 class="sub-h">8.3 — Rituais Operacionais</h3>
+<div class="callout">
+<div class="callout-label">Daily da equipe (15 min)</div>
+<p>Quantos leads entraram ontem · quantos agendamentos · quantos faltaram · qual o caso quente do dia.</p>
+</div>
+<div class="callout">
+<div class="callout-label">Review semanal (45 min)</div>
+<p>Funnel da semana · onde vazou · 1 lead perdido por equipe pra análise.</p>
+</div>
+`
+},
+
+9:{
+  intro:"Cards rápidos pra consulta no calor do atendimento. Imprime, deixa do lado do monitor.",
+  parts:["Sinais de caso forte","Quando priorizar","Documentos","Frases-âncora"],
+  body:`
+<h3 class="sub-h">Sinais de Caso Forte (qualificação)</h3>
+<ul class="bullet-list">
+<li>Sequela concreta nomeada ("trava o joelho", "perdi força na mão")</li>
+<li>Trabalha com dificuldade ou em função adaptada</li>
+<li>Tem laudos médicos guardados</li>
+<li>Tem documentos do acidente (BO, CAT, prontuário)</li>
+<li>Não está aposentado</li>
+</ul>
+
+<h3 class="sub-h">Quando Priorizar Agendamento</h3>
+<ul class="bullet-list">
+<li><b>Quente:</b> benefício cortado pelo INSS recentemente</li>
+<li><b>Quente:</b> alta médica indevida em curso (prazo recursal)</li>
+<li><b>Forte:</b> múltiplas sequelas + trabalhando</li>
+<li><b>Forte:</b> acidente de trabalho com sequela e ainda no emprego</li>
+</ul>
+
+<h3 class="sub-h">Documentos que Ajudam (na ordem)</h3>
+<ol class="bullet-list">
+<li>Laudos médicos recentes e antigos</li>
+<li>Exames de imagem (raio-x, ressonância, tomografia)</li>
+<li>Documentos do acidente (BO, CAT, prontuário, alta)</li>
+<li>Carteira de trabalho ou CNIS</li>
+<li>Carta de negativa do INSS</li>
+<li>RG e CPF</li>
+</ol>
+
+<h3 class="sub-h">Frases-Âncora da Equipe</h3>
+<div class="dual-grid">
+<div class="dual-card can">
+<div class="dual-card-h">Pode falar</div>
+<ul>
+<li>"Em 5 minutos te dou um norte"</li>
+<li>"Auxílio-acidente é justamente pra quem voltou a trabalhar com sequela"</li>
+<li>"Enquanto a sequela existir, o direito existe"</li>
+<li>"Negativa administrativa não é palavra final"</li>
+<li>"Pode juntar com salário"</li>
+</ul>
+</div>
+<div class="dual-card cant">
+<div class="dual-card-h">Nunca falar</div>
+<ul>
+<li>"Vou conseguir pra você"</li>
+<li>"Caso fácil"</li>
+<li>"Vai sair em X meses"</li>
+<li>Citar valor de honorário em público</li>
+<li>"Pode deixar comigo"</li>
+</ul>
+</div>
+</div>
+`
+},
+
+10:{
+  intro:"Termos técnicos traduzidos em linguagem do dia a dia — pra alinhar a equipe.",
+  parts:["A-E","F-N","O-Z"],
+  body:`
+<h3 class="sub-h">A — E</h3>
+<table>
+<thead><tr><th style="width:30%">Termo</th><th>O que é</th></tr></thead>
+<tbody>
+<tr><td><b>Acidente de trabalho</b></td><td>Acidente ocorrido durante o trabalho ou no trajeto. Gera direitos específicos contra empresa e INSS.</td></tr>
+<tr><td><b>Acidente de qualquer natureza</b></td><td>Acidente fora do trabalho (trânsito, casa, esporte). Também pode gerar auxílio-acidente.</td></tr>
+<tr><td><b>Alta médica</b></td><td>Decisão do INSS encerrando o auxílio-doença. Pode ser contestada se a pessoa ainda está incapaz.</td></tr>
+<tr><td><b>Auxílio-acidente</b></td><td>Indenização mensal vitalícia por sequela permanente que reduz a capacidade de trabalho. <b>Pode ser pago junto com salário.</b></td></tr>
+<tr><td><b>Auxílio por incapacidade temporária</b></td><td>Antigo "auxílio-doença". Pago enquanto a pessoa está incapaz de trabalhar.</td></tr>
+<tr><td><b>CAT</b></td><td>Comunicação de Acidente de Trabalho. Documento que registra o acidente — peça importante pra prova.</td></tr>
+<tr><td><b>CNIS</b></td><td>Cadastro Nacional de Informações Sociais. Histórico de contribuições e vínculos.</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub-h">F — N</h3>
+<table>
+<tbody>
+<tr><td><b>Função adaptada</b></td><td>Quando o trabalhador volta ao trabalho mas em função diferente por causa da sequela.</td></tr>
+<tr><td><b>Indenização mensal</b></td><td>Pagamento mensal vitalício do auxílio-acidente — geralmente 50% do salário-de-benefício.</td></tr>
+<tr><td><b>Laudo médico</b></td><td>Documento do médico que atesta a sequela. Coração da prova do caso.</td></tr>
+<tr><td><b>Nexo causal</b></td><td>Ligação entre o acidente e a sequela atual. Tem que ser comprovada.</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub-h">O — Z</h3>
+<table>
+<tbody>
+<tr><td><b>Perícia</b></td><td>Avaliação médica feita pelo INSS (administrativa) ou pela Justiça (judicial).</td></tr>
+<tr><td><b>Redução da capacidade</b></td><td>Conceito-chave do auxílio-acidente: a sequela tem que reduzir a capacidade de trabalho.</td></tr>
+<tr><td><b>Sequela permanente</b></td><td>Lesão que ficou pra sempre depois do acidente. Requisito do auxílio-acidente.</td></tr>
+<tr><td><b>Tutela de urgência</b></td><td>Pedido judicial pra obrigar pagamento imediato em casos urgentes.</td></tr>
+<tr><td><b>Via administrativa</b></td><td>Pedido feito direto no INSS (sem entrar na Justiça).</td></tr>
+<tr><td><b>Via judicial</b></td><td>Ação na Justiça Federal, geralmente quando o INSS negou.</td></tr>
+</tbody>
+</table>
+`
+}
+};
+
+/* ============================
+   STATE
+   ============================ */
+let currentPart = 1;
+
+/* ============================
+   RENDER
+   ============================ */
+function buildNav(){
+  const nav = document.getElementById('pbNav');
+  nav.innerHTML = '';
+  PARTS.forEach(p => {
+    const li = document.createElement('li');
+    li.className = 'pb-nav-item' + (p.n === currentPart ? ' active' : '');
+    li.onclick = () => goToPart(p.n);
+    li.innerHTML = `
+      <span class="pb-nav-num">${String(p.n).padStart(2,'0')}</span>
+      <span class="pb-nav-text">${p.title}</span>
+    `;
+    nav.appendChild(li);
+  });
+  document.getElementById('progressBar').style.width = (currentPart * 10) + '%';
+  document.getElementById('progressCount').textContent =
+    String(currentPart).padStart(2,'0') + '/10';
+}
+
+function renderPart(n){
+  currentPart = n;
+  const part = PARTS.find(p => p.n === n);
+  const data = CONTENT[n];
+  const body = document.getElementById('pbBody');
+
+  body.innerHTML = `
+    <div class="pb-card">
+      <span class="pb-part-tag">Parte ${n}</span>
+      <h2>${part.title}</h2>
+      <p class="pb-intro">${data.intro}</p>
+      <div class="nesta-parte">
+        <div class="nesta-parte-label">Nesta parte</div>
+        <ul>${data.parts.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="pb-card">${data.body}</div>
+  `;
+
+  // hydrate script-text into data-text for copy buttons
+  body.querySelectorAll('.script').forEach(s => {
+    const txt = s.querySelector('.script-text').textContent;
+    s.querySelectorAll('[data-text=""]').forEach(b => b.dataset.text = txt);
+  });
+
+  // pager
+  const pager = document.getElementById('pbPager');
+  const prev = n > 1 ? PARTS[n-2] : null;
+  const next = n < 10 ? PARTS[n] : null;
+  pager.innerHTML = `
+    <button class="pager-btn" ${prev?'':'disabled'} ${prev?`onclick="goToPart(${prev.n})"`:''}>
+      <div class="lbl">← Anterior</div>
+      <div class="title">${prev?prev.title:''}</div>
+    </button>
+    <button class="pager-btn next" ${next?'':'disabled'} ${next?`onclick="goToPart(${next.n})"`:''}>
+      <div class="lbl">Próximo →</div>
+      <div class="title">${next?next.title:''}</div>
+    </button>
+  `;
+
+  buildNav();
+  bindCopy();
+  bindParts();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function showView(name){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  if (name === 'playbook') renderPart(currentPart);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function goToPart(n){
+  showView('playbook');
+  setTimeout(() => renderPart(n), 50);
+}
+
+/* ============================
+   COPY / PARTS
+   ============================ */
+function splitParts(txt){
+  let blocks = txt.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+  const merged = [];
+  for (let i=0; i<blocks.length; i++){
+    if (merged.length && blocks[i].length < 28 && !blocks[i].includes('\n')){
+      merged[merged.length-1] += '\n' + blocks[i];
+    } else merged.push(blocks[i]);
+  }
+  return merged;
+}
+
+async function doCopy(txt){
+  try { await navigator.clipboard.writeText(txt); }
+  catch(_) {
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); ta.remove();
+  }
+}
+
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+function bindCopy(){
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.onclick = async (e) => {
+      e.stopPropagation();
+      const txt = btn.dataset.text;
+      await doCopy(txt);
+      const orig = btn.textContent;
+      btn.textContent = 'Copiado';
+      btn.classList.add('done');
+      showToast('Mensagem copiada');
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.classList.remove('done');
+      }, 1500);
+    };
+  });
+}
+
+function esc(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function bindParts(){
+  document.querySelectorAll('.parts-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const script = btn.closest('.script');
+      const box = script.querySelector('.bubbles');
+      const open = box.classList.contains('show');
+      if (open) { box.classList.remove('show'); return; }
+      const txt = btn.dataset.text;
+      const parts = splitParts(txt);
+      box.innerHTML = `<span class="bubbles-hint">Envie uma de cada vez — toque para copiar cada balão</span>` +
+        parts.map(p => `<div class="bubble">${esc(p)}<button class="bcopy" data-text="${encodeURIComponent(p)}">Copiar</button></div>`).join('');
+      box.classList.add('show');
+      box.querySelectorAll('.bcopy').forEach(b => {
+        b.onclick = async (ev) => {
+          ev.stopPropagation();
+          await doCopy(decodeURIComponent(b.dataset.text));
+          b.textContent = 'Copiado';
+          b.classList.add('done');
+          showToast('Balão copiado');
+          setTimeout(() => { b.textContent = 'Copiar'; b.classList.remove('done'); }, 1400);
+        };
+      });
+    };
+  });
+}
+
+/* ============================
+   SEARCH
+   ============================ */
+function buildSearchIndex(){
+  const idx = [];
+  Object.keys(CONTENT).forEach(n => {
+    const part = PARTS.find(p => p.n === +n);
+    const data = CONTENT[n];
+    const tmp = document.createElement('div');
+    tmp.innerHTML = data.body;
+    tmp.querySelectorAll('.script').forEach(s => {
+      const label = s.querySelector('.script-label')?.textContent || '';
+      const text = s.querySelector('.script-text')?.textContent || '';
+      idx.push({ partN: +n, partTitle: part.title, label, text });
+    });
+  });
+  return idx;
+}
+let SEARCH_INDEX = [];
+
+function highlight(text, q){
+  const safe = esc(text.length > 160 ? text.slice(0,160) + '…' : text);
+  const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'ig');
+  return safe.replace(re, '<mark>$1</mark>');
+}
+
+function runSearch(q){
+  const results = document.getElementById('searchResults');
+  q = q.trim();
+  if (q.length < 2) { results.innerHTML = '<div class="search-empty">Digite ao menos 2 letras para buscar.</div>'; return; }
+  const matches = SEARCH_INDEX.filter(it =>
+    (it.label + ' ' + it.text + ' ' + it.partTitle).toLowerCase().includes(q.toLowerCase())
+  );
+  if (!matches.length) {
+    results.innerHTML = `<div class="search-empty">Nada encontrado para "<b>${esc(q)}</b>".</div>`;
+    return;
+  }
+  results.innerHTML = matches.map(it => `
+    <div class="sr-item" data-part="${it.partN}">
+      <div class="sr-crumb">Parte ${it.partN} · ${esc(it.partTitle)}</div>
+      <div class="sr-title">${esc(it.label)}</div>
+      <div class="sr-snippet">${highlight(it.text, q)}</div>
+    </div>
+  `).join('');
+  results.querySelectorAll('.sr-item').forEach(el => {
+    el.onclick = () => {
+      closeSearch();
+      goToPart(+el.dataset.part);
+    };
+  });
+}
+
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('searchInput').focus(), 50);
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('show');
+  document.getElementById('searchInput').value = '';
+}
+
+document.getElementById('searchInput').addEventListener('input', e => runSearch(e.target.value));
+document.getElementById('searchOverlay').addEventListener('click', e => {
+  if (e.target.id === 'searchOverlay') closeSearch();
+});
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    openSearch();
+  }
+  if (e.key === 'Escape') closeSearch();
+});
+
+/* INIT */
+buildNav();
+// build search index after a tiny delay so content is rendered into DOM
+setTimeout(() => { SEARCH_INDEX = buildSearchIndex(); }, 100);
+</script>
+</body>
+</html>
